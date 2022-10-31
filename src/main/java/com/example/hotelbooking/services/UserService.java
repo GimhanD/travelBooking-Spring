@@ -5,6 +5,7 @@ import com.example.hotelbooking.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -24,7 +25,7 @@ public class UserService {
     public boolean isUserExists(User user) {
         boolean userExists = false;
         User existingUser = userRepository.findByEMAIL(user.getEmail());
-        if(existingUser!=null){
+        if (existingUser != null) {
             userExists = true;
         }
         return userExists;
@@ -38,8 +39,12 @@ public class UserService {
         return userRepository.findById(id).get();
     }
 
-    public  void deleteUser(Long id) {
+    public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
 
+    public User updateUser(User user, int id) {
+        user.setId((long) id);
+        return userRepository.save(user);
+    }
 }

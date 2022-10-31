@@ -35,17 +35,16 @@ public class UserController {
     }
 
     @PutMapping( "/updateUser/{id}")
-    public ResponseEntity<Map> userCreate(@RequestBody User user, @PathVariable int id) {
+    public ResponseEntity<Map> userUpdate(@RequestBody User user, @PathVariable int id) {
 
         System.out.println(user);
         System.out.println(id);
         HashMap<String, Object> response = new HashMap<>();
 
-        userService.createUser(user);
+        userService.updateUser(user, id);
 
         response.put("success", "true");
         response.put("message", "User successfully updated");
-
         return ResponseEntity.ok().body(response);
     }
 
